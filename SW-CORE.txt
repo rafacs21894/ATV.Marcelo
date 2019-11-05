@@ -1,0 +1,96 @@
+enable
+configure terminal
+hostname SW-CORE-GRUPO-07
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADOS"
+enable secret enable
+configure terminal
+hostname SW-GRUPO-07
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADOS"
+enable secret 12345678
+username rafael privilege 15 secret 12345678
+username alex privilege 15 secret 12345678
+username caio privilege 15 secret 12345678
+username cleiton privilege 15 secret 12345678
+ip domain-name grupo7.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+password 12345678
+login local
+exit
+line vty 0 15
+transport input ssh
+exec-timeout 5
+login local
+exit
+vlan 17
+name VLAN17
+vlan 18
+name VLAN18
+vlan 107
+name VLAN107
+interface f0/1
+switchport mode access
+switchport access vlan 17
+description PC-01
+interface f0/2
+switchport mode access
+switchport access vlan 18
+description PC-02
+exit
+interface g0/2
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 17,18,107,99
+description CONEXÃO TRUNK
+exit
+interface vlan 107
+ip address 192.168.248.253 255.255.255.0
+no shutdown
+description INTERFACE DE GERENCIAMENTO
+exit
+ip default-gateway 192.168.248.1
+do wr
+username rafael privilege 15 secret 123
+username alex privilege 15 secret 123
+username caio privilege 15 secret 123
+username cleiton privilege 15 secret 123
+ip domain-name grupo7.local
+crypto key generate rsa general-keys modulus 1024
+line console 0
+password 123
+login local
+exit
+line vty 0 15
+transport input ssh
+exec-timeout 5
+login local
+exit
+vlan 17
+name VLAN17
+vlan 18
+name VLAN18
+vlan 107
+name VLAN107
+interface f0/24
+switchport mode access
+switchport access vlan 107
+description SRV-GRUPO7
+exit
+interface g0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 17,18,107,99
+description CONEXÃO TRUNK
+interface g0/2
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 17,18,107,99
+description CONEXÃO TRUNK
+exit
+interface vlan 107
+ip address 192.168.248.254 255.255.255.0
+no shutdown
+description INTERFACE DE GERENCIAMENTO
+exit
+ip default-gateway 192.168.248.1
+do wr

@@ -1,0 +1,41 @@
+enable
+configure terminal
+hostname SW-CORE-GRUPO-07
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADOS"
+enable secret 12345678
+username rafael privilege 15 secret 12345678
+username alex privilege 15 secret 12345678
+username caio privilege 15 secret 12345678
+username cleiton privilege 15 secret 12345678
+ip domain-name grupo7.local
+crypto key generate rsa general-keys modulus 1024
+security passwords min-length 8
+login block-for 240 attempts 7 within 60
+line console 0
+password 12345678
+login local
+exit
+line vty 0 15
+transport input ssh
+exec-timeout 5
+login local
+exit
+interface g0/1.17
+encapsulation dot1q 17
+ip address 192.168.17.1 255.255.255.0
+ip helper-address 192.168.248.5
+description VLAN 17
+exit
+interface g0/1.18
+encapsulation dot1q 18
+ip address 192.168.18.1 255.255.255.0
+ip helper-address 192.168.248.5
+description VLAN 18
+exit
+interface g0/1.107
+encapsulation dot1q 107
+ip address 192.168.248.1 255.255.255.0
+ip helper-address 172.16.0.133
+description VLAN 100
+exit
+do wr
