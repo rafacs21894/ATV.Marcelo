@@ -28,16 +28,16 @@ interface f0/1
 switchport mode access
 switchport access vlan 17
 description PC-01
-interface f0/2
+interface f0/3
 switchport mode access
-switchport access vlan 18
+switchport access vlan 17
 description PC-02
 exit
-interface g0/2
+interface f0/23
 switchport mode trunk
 switchport trunk native vlan 99
 switchport trunk allowed vlan 17,18,107,99
-description CONEX√O TRUNK
+description CONEX√ÉO TRUNK
 exit
 interface vlan 107
 ip address 192.168.248.253 255.255.255.0
