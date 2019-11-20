@@ -1,6 +1,6 @@
 enable
 configure terminal
-hostname SW-CORE-GRUPO-07
+hostname RT-01
 banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADOS"
 enable secret 12345678
 username rafael privilege 15 secret 12345678
