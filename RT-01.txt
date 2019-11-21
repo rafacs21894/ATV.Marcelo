@@ -1,6 +1,6 @@
 enable
 configure terminal
-hostname RT-01
+hostname RT-04
 banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADOS"
 enable secret 12345678
 username rafael privilege 15 secret 12345678
@@ -20,22 +20,29 @@ transport input ssh
 exec-timeout 5
 login local
 exit
+interface g0/1
+no shutdown
+exit
 interface g0/1.17
 encapsulation dot1q 17
 ip address 192.168.17.1 255.255.255.0
 ip helper-address 192.168.248.5
 description VLAN 17
 exit
-interface g0/1.18
-encapsulation dot1q 18
-ip address 192.168.18.1 255.255.255.0
-ip helper-address 192.168.248.5
-description VLAN 18
-exit
 interface g0/1.107
 encapsulation dot1q 107
 ip address 192.168.248.1 255.255.255.0
-ip helper-address 172.16.0.133
-description VLAN 100
+ip helper-address 192.168.248.5
+description VLAN 107
 exit
+interface serial0/0/0
+ip address 200.200.180.1 255.255.255.252
+no shutdown
+exit
+ip route 192.168.18.0 255.255.255.0 200.200.180.2
+ip route 192.168.18.0 255.255.255.0 200.200.180.3
+ip route 192.168.18.0 255.255.255.0 200.200.180.4
+ip route 192.168.247.0 255.255.255.0 200.200.180.2
+ip route 192.168.247.0 255.255.255.0 200.200.180.3
+ip route 192.168.247.0 255.255.255.0 200.200.180.4
 do wr
