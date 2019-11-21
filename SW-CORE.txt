@@ -20,24 +20,22 @@ login local
 exit
 vlan 17
 name VLAN17
-vlan 18
-name VLAN18
 vlan 107
 name VLAN107
-interface f0/1
+interface f0/23
 switchport mode access
 switchport access vlan 107
 description SRV-GRUPO7
 exit
-interface f0/8
+interface f0/7
 switchport mode trunk
 switchport trunk native vlan 99
-switchport trunk allowed vlan 17,18,107,99
+switchport trunk allowed vlan 17,107,99
 description CONEXÃO TRUNK
 interface g0/1
 switchport mode trunk
 switchport trunk native vlan 99
-switchport trunk allowed vlan 17,18,107,99
+switchport trunk allowed vlan 17,107,99
 description CONEXÃO TRUNK
 exit
 interface vlan 107
